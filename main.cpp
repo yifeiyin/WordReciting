@@ -10,17 +10,12 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+
 static bool GAMEOVER = false;
 static string GAMEOVERINFO = "";
 
-//struct Words {
-//    string word;
-//    string meaning;
-//};
-
 static string * words;
 static int quantity;
-
 
 void Speak(string str);
 void Shuffle();
@@ -113,7 +108,6 @@ void StartPractice()
             Speak(words[i]);
 
             string input;
-
             getline(cin, input);
 
             system("clear");
@@ -127,14 +121,15 @@ void StartPractice()
             {
                 cout << "Incorrect." << endl;
                 cout << "✅  Should be: " << words[i] << endl;
-                cout << "🚫  Yours is : " << input << endl << endl;
+                cout << "🚫  Yours was: " << input << endl;
+                cout << endl;
                 i--; continue;
             }
         }
         system("clear");
         cout << "You completed the list! \n Want to start over? y/n \n> ";
         string tmp;
-        cin >> tmp;
+        cin >> tmp; cin.get();
         if (tmp == "n" || tmp == "N")
             break;
     }
@@ -192,13 +187,14 @@ int main()
 
     for (int i = 0; i < quantity; i++)
         getline(file, words[i]);
+    cin.get();
 
     file.close();
 
     Print(fileName);
 
-    cin.get();
-    StartPractice();
+    if (quantity != 0)
+        StartPractice();
 
     delete [] words;
 
